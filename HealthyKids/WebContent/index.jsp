@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Healthy Kids</title>
 </head>
 <body>
-	<jsp:forward page="login.jsp"></jsp:forward>
+	<jsp:forward page="pages/security/login.jsp"></jsp:forward>
 </body>
 </html>
