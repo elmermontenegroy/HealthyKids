@@ -1,17 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
 <frameset rows="100,*,50" border=0 >
-	<frame name="header" src="header.jsp" noresize="noresize">
-	<frameset cols="170,*">
-		<frame name="menu" src="menu.jsp" noresize="noresize">
-		<frame name="body" src="body.jsp">
+	<frame name="header" src="${pageContext.request.contextPath}/templates/header.jsp" noresize="noresize">
+	<frameset cols="300,*">
+		<frame name="menu" src="${pageContext.request.contextPath}/templates/menu.jsp" noresize="noresize">
+		<frame name="body" src="${pageContext.request.contextPath}/templates/body.jsp">
 	</frameset>
-	<frame name="footer" src="footer.jsp" noresize="noresize">
+	<frame name="footer" src="${pageContext.request.contextPath}/templates/footer.jsp" noresize="noresize">
 </frameset>
-</html>

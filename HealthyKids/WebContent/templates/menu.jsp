@@ -2,21 +2,73 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body bgcolor="#3EFDF0">
-	<h2>Menu</h2>
-	<hr>
-	<a href="central.jsp" target="cuerpo">Inicio</a><br>
-	Mantenimientos<br>
-	* <a href="registrar.jsp" target="cuerpo">Registrar</a><br>
-	* <a href="listar.jsp" target="cuerpo">Listar</a><br>
-	* <a href="actualizar.jsp" target="cuerpo">Actualizar</a><br>
-	* <a href="eliminar.jsp" target="cuerpo">Eliminar</a><br>
-	<br>
-	<a href="login.jsp" target="_parent">Cerrar sesión</a><br>
+	<head>
 	
-</body>
+		<!-- META -->
+		<title>Healthy Kids - Niños Saludables solo con nosotros :D</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="description" content="" />
+	
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/normalize.css" media="all" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/kickstart.css" media="all" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css" media="all" />
+			
+		<!-- Javascript -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/kickstart.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/javascript.js"></script>
+		
+	</head>
+	<body class="defaultMenu">
+		
+		<div class="container">
+	        <ul>
+	            <li class="dropdown">
+	                <input type="checkbox" />
+	                <a href="#" data-toggle="dropdown">First Menu</a>
+	                <ul class="dropdown-menu">
+	                <li><a href="#">Home</a></li>
+	                <li><a href="#">About Us</a></li>
+	                <li><a href="#">Services</a></li>
+	                <li><a href="#">Contact</a></li>
+	                </ul>
+	            </li>
+	            <li class="dropdown">
+	                <input type="checkbox" />
+	                <a href="#" data-toggle="dropdown">Second Menu</a>
+	                <ul class="dropdown-menu">
+	                <li><a href="#">Home</a></li>
+	                <li><a href="#">About Us</a></li>
+	                <li><a href="#">Services</a></li>
+	                <li><a href="#">Contact</a></li>
+	                </ul>
+	            </li>
+	            <li class="dropdown">
+	                <input type="checkbox" />
+	                <a href="#" data-toggle="dropdown">Third Menu</a>
+	                <ul class="dropdown-menu">
+	                <li><a href="#">Home</a></li>
+	                <li><a href="#">About Us</a></li>
+	                <li><a href="#">Services</a></li>
+	                <li><a href="#">Contact</a></li>
+	                </ul>
+	            </li>
+	        </ul>
+	    </div>
+	
+<!-- 		<h5>Menu</h5> -->
+<!-- 		<hr> -->
+<!-- 		<a href="central.jsp" target="cuerpo">Inicio</a><br> -->
+<!-- 		Mantenimientos<br> -->
+<!-- 		* <a href="registrar.jsp" target="cuerpo">Registrar</a><br> -->
+<!-- 		* <a href="listar.jsp" target="cuerpo">Listar</a><br> -->
+<!-- 		* <a href="actualizar.jsp" target="cuerpo">Actualizar</a><br> -->
+<!-- 		* <a href="eliminar.jsp" target="cuerpo">Eliminar</a><br> -->
+<!-- 		<br> -->
+<!-- 		<a href="login.jsp" target="_parent">Cerrar sesión</a><br> -->
+	</body>
 </html>
+
+

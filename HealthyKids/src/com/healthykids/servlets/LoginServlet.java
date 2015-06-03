@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		// -- nos envia a la pagina bienvenido.jps junto a un mensaje
 		RequestDispatcher rd;
 		if (usuario.equals("admin") && clave.equals("1234")) {//validado != null
-			rd = request.getRequestDispatcher("pages/templates/master.jsp");
+			rd = request.getRequestDispatcher("templates/master.jsp");
 			
 /*			//atributo que reconoce todo
 			HttpSession misesion= request.getSession();
