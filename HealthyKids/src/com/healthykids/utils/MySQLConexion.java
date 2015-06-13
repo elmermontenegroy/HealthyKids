@@ -9,7 +9,7 @@ public class MySQLConexion {
 		Connection con = null; 
 		try { 
 			Class.forName("com.mysql.jdbc.Driver"); 
-			String url = "jdbc:mysql://localhost/HealthyKidsDB"; 
+			String url = "jdbc:mysql://localhost/HealthyKidsBD"; 
 			String usr = "root"; 
 			String psw = "mysql"; 
 			con = DriverManager.getConnection(url,usr,psw); 
