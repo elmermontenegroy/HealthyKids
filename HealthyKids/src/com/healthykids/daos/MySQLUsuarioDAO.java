@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.healthykids.beans.PerfilDTO;
 import com.healthykids.beans.UsuarioDTO;
 import com.healthykids.interfaces.UsuarioDAO;
+import com.healthykids.utils.FechaUtils;
 import com.healthykids.utils.MySQLConexion;
 
 public class MySQLUsuarioDAO implements UsuarioDAO {
@@ -23,25 +25,30 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
 		
 		try {
 			con = MySQLConexion.getConexion();
-			sp ="{call sp_Usuario_Insertar(?, ?, ?, ?, ?)}";
+			sp ="{call sp_Usuario_Insertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 			cst = con.prepareCall(sp);
 			
 			cst.setString(1, usuario.getNombre());
-			cst.setString(2, usuario.getApellidos());
-			cst.setString(3, usuario.getUsuario());
-			cst.setString(4, usuario.getClave());
-			cst.setString(5, usuario.getEstado().toString());
+			cst.setString(2, usuario.getApellido());
+			cst.setString(3, FechaUtils.dateToStringShort(usuario.getFechaNacimiento()));
+			cst.setString(4, FechaUtils.dateToStringShort(usuario.getFechaIngreso()));
+			cst.setInt(5, usuario.getPerfil().getPerfilId());
+			cst.setString(6, usuario.getUsuario());
+			cst.setString(7, usuario.getClave());
+			cst.setInt(8, usuario.getTelefono());
+			cst.setString(9, usuario.getEmail());
+			cst.setString(10, usuario.getEstado());
 			
 			result = cst.executeUpdate();
 			
 		} catch (Exception e) {
-			System.out.println("MySQLUsuarioDAO - insertar -> Error en la Conexi贸n: "+e.getMessage());
+			System.out.println("MySQLUsuarioDAO - insertar -> Error en la Conexi髇: "+e.getMessage());
 		} finally{
 			try {
 				if(con != null) con.close();
 				if(cst != null) cst.close();
 			} catch (SQLException e) {
-				System.out.println("MySQLUsuarioDAO - insertar -> No se pudo Cerrar la Conexion: "+e.getMessage());
+				System.out.println("MySQLUsuarioDAO - insertar -> No se pudo Cerrar la Conexi髇: "+e.getMessage());
 			} 
 		}
 		
@@ -57,26 +64,31 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
 		
 		try {
 			con = MySQLConexion.getConexion();
-			sp ="{call sp_Usuario_Actualizar(?, ?, ?, ?, ?, ?)}";
+			sp ="{call sp_Usuario_Actualizar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 			cst = con.prepareCall(sp);
 			
 			cst.setInt(1, usuario.getUsuarioId()!=null?usuario.getUsuarioId():0);
 			cst.setString(2, usuario.getNombre()!=null?usuario.getNombre():"");
-			cst.setString(3, usuario.getApellidos()!=null?usuario.getApellidos():"");
-			cst.setString(4, usuario.getUsuario()!=null?usuario.getUsuario():"");
-			cst.setString(5, usuario.getClave()!=null?usuario.getClave():"");
-			cst.setString(6, usuario.getEstado()!=null?usuario.getEstado().toString():"");
-			
+			cst.setString(3, usuario.getApellido()!=null?usuario.getApellido():"");
+			cst.setString(4, usuario.getFechaNacimiento()!=null?FechaUtils.dateToStringShort(usuario.getFechaNacimiento()):"");
+			cst.setString(5, usuario.getFechaIngreso()!=null?FechaUtils.dateToStringShort(usuario.getFechaIngreso()):"");
+			cst.setInt(6, usuario.getPerfil()!=null?usuario.getPerfil().getPerfilId():0);
+			cst.setString(7, usuario.getUsuario()!=null?usuario.getUsuario():"");
+			cst.setString(8, usuario.getClave()!=null?usuario.getClave():"");
+			cst.setInt(9, usuario.getTelefono()!=null?usuario.getTelefono():0);
+			cst.setString(10, usuario.getEmail()!=null?usuario.getEmail():"");
+			cst.setString(11, usuario.getEstado()!=null?usuario.getEstado():"");
+						
 			result = cst.executeUpdate();
 			
 		} catch (Exception e) {
-			System.out.println("MySQLUsuarioDAO - actualizar -> Error en la Conexi贸n: "+e.getMessage());
+			System.out.println("MySQLUsuarioDAO - actualizar -> Error en la Conexi髇: "+e.getMessage());
 		} finally{
 			try {
 				if(con != null) con.close();
 				if(cst != null) cst.close();
 			} catch (SQLException e) {
-				System.out.println("MySQLUsuarioDAO - actualizar -> No se pudo Cerrar la Conexion: "+e.getMessage());
+				System.out.println("MySQLUsuarioDAO - actualizar -> No se pudo Cerrar la Conexi髇: "+e.getMessage());
 			} 
 		}
 		
@@ -93,31 +105,36 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
 		
 		try {
 			con = MySQLConexion.getConexion();
-			sp = "{call sp_Usuario_Listar(?, ?, ?, ?, ?, ?)}";
+			sp = "{call sp_Usuario_Listar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 			cst = con.prepareCall(sp);
 			
 			cst.setInt(1, usuario.getUsuarioId()!=null?usuario.getUsuarioId():0);
 			cst.setString(2, usuario.getNombre()!=null?usuario.getNombre():"");
-			cst.setString(3, usuario.getApellidos()!=null?usuario.getApellidos():"");
-			cst.setString(4, usuario.getUsuario()!=null?usuario.getUsuario():"");
-			cst.setString(5, usuario.getClave()!=null?usuario.getClave():"");
-			cst.setString(6, usuario.getEstado()!=null?usuario.getEstado().toString():"");
+			cst.setString(3, usuario.getApellido()!=null?usuario.getApellido():"");
+			cst.setString(4, usuario.getFechaNacimiento()!=null?FechaUtils.dateToStringShort(usuario.getFechaNacimiento()):"");
+			cst.setString(5, usuario.getFechaIngreso()!=null?FechaUtils.dateToStringShort(usuario.getFechaIngreso()):"");
+			cst.setInt(6, usuario.getPerfil()!=null?usuario.getPerfil().getPerfilId():0);
+			cst.setString(7, usuario.getUsuario()!=null?usuario.getUsuario():"");
+			cst.setString(8, usuario.getClave()!=null?usuario.getClave():"");
+			cst.setInt(9, usuario.getTelefono()!=null?usuario.getTelefono():0);
+			cst.setString(10, usuario.getEmail()!=null?usuario.getEmail():"");
+			cst.setString(11, usuario.getEstado()!=null?usuario.getEstado():"");
 			
 			ResultSet rs = cst.executeQuery();
 			
 			while (rs.next()) {
-				u = new UsuarioDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6).charAt(0));
+				u = new UsuarioDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), new PerfilDTO(rs.getInt(6), "", ""), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11));
 				result.add(u);
 			}
 			
 		} catch (Exception e) {
-			System.out.println("MySQLUsuarioDAO - listar -> Error en la Conexi贸n: "+e.getMessage());
+			System.out.println("MySQLUsuarioDAO - listar -> Error en la Conexi髇: "+e.getMessage());
 		} finally {
 			try {
 				if(con != null) con.close();
 				if(cst != null) cst.close();
 			} catch (SQLException e) {
-				System.out.println("MySQLUsuarioDAO - listar -> No se pudo Cerrar la Conexion: "+e.getMessage());
+				System.out.println("MySQLUsuarioDAO - listar -> No se pudo Cerrar la Conexi髇: "+e.getMessage());
 			} 
 		}
 		
@@ -141,13 +158,13 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
 			result = cst.executeUpdate();
 			
 		} catch (Exception e) {
-			System.out.println("MySQLUsuarioDAO - actualizar -> Error en la Conexi贸n: "+e.getMessage());
+			System.out.println("MySQLUsuarioDAO - actualizar -> Error en la Conexi髇: "+e.getMessage());
 		} finally{
 			try {
 				if(con != null) con.close();
 				if(cst != null) cst.close();
 			} catch (SQLException e) {
-				System.out.println("MySQLUsuarioDAO - actualizar -> No se pudo Cerrar la Conexion: "+e.getMessage());
+				System.out.println("MySQLUsuarioDAO - actualizar -> No se pudo Cerrar la Conexi髇: "+e.getMessage());
 			} 
 		}
 		
@@ -171,12 +188,12 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
 			
 			ResultSet rs = cst.executeQuery();
 			
-			while (rs.next()) {
-				result = new UsuarioDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6).charAt(0));
+			if (rs.next()) {
+				result = new UsuarioDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), new PerfilDTO(rs.getInt(6), "", ""), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11));
 			}
 			
 		} catch (Exception e) {
-			System.out.println("MySQLUsuarioDAO - listar -> Error en la Conexi贸n: "+e.getMessage());
+			System.out.println("MySQLUsuarioDAO - listar -> Error en la Conexi髇: "+e.getMessage());
 		} finally {
 			try {
 				if(con != null) con.close();
