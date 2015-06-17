@@ -23,6 +23,11 @@ public class UsuarioDTO {
 	public UsuarioDTO() {
 	}
 	
+	public UsuarioDTO(String usuario, String clave) {
+		this.usuario = usuario;
+		this.clave = clave;
+	}
+
 	public UsuarioDTO(Integer usuarioId, String nombre, String apellido,
 			Date fechaNacimiento, Date fechaIngreso, PerfilDTO perfil,
 			String usuario, String clave, Integer telefono, String email,

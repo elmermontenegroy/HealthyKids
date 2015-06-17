@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Listado de usuarios</h1>
+	<h1>Listado de perfiles</h1>
 	<hr>
 	
 </body>

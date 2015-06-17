@@ -32,11 +32,11 @@
 			<table>
 				<tr>
 					<td><label for="usu">Usuario: </label></td>
-					<td><input type="text" size="10" maxlength="10"	name="txtUsuario" id="usu" class="txt" placeholder="Usuario" required="required"></td>
+					<td><input type="text" size="15" maxlength="15"	name="txtUsuario" id="usu" class="txt" placeholder="Usuario" required="required"></td>
 				</tr>
 				<tr>
 					<td><label for="pas">Password: </label></td>
-					<td><input type="password" size="10" maxlength="10"	name="txtClave" id="pas" class="txt" placeholder="Clave" required="required" ></td>
+					<td><input type="password" size="15" maxlength="15"	name="txtClave" id="pas" class="txt" placeholder="Clave" required="required" ></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="submit" value="Iniciar Sesion"	name="iniciosesion"></td>

@@ -27,32 +27,20 @@
 	        <ul>
 	            <li class="dropdown">
 	                <input type="checkbox" />
-	                <a href="#" data-toggle="dropdown">First Menu</a>
+	                <a href="#" data-toggle="dropdown">Mantenimientos</a>
 	                <ul class="dropdown-menu">
-	                <li><a href="#">Home</a></li>
-	                <li><a href="#">About Us</a></li>
-	                <li><a href="#">Services</a></li>
-	                <li><a href="#">Contact</a></li>
+	                <li><a href="${pageContext.request.contextPath}/pages/maintenances/Perfiles/perfilListar.jsp" target="body">Perfiles</a></li>
+	                <li><a href="${pageContext.request.contextPath}/pages/maintenances/Usuarios/usuarioListar.jsp" target="body">Usuarios</a></li>
 	                </ul>
 	            </li>
 	            <li class="dropdown">
 	                <input type="checkbox" />
-	                <a href="#" data-toggle="dropdown">Second Menu</a>
+	                <a href="#" data-toggle="dropdown">Reportes</a>
 	                <ul class="dropdown-menu">
-	                <li><a href="#">Home</a></li>
-	                <li><a href="#">About Us</a></li>
-	                <li><a href="#">Services</a></li>
-	                <li><a href="#">Contact</a></li>
-	                </ul>
-	            </li>
-	            <li class="dropdown">
-	                <input type="checkbox" />
-	                <a href="#" data-toggle="dropdown">Third Menu</a>
-	                <ul class="dropdown-menu">
-	                <li><a href="#">Home</a></li>
-	                <li><a href="#">About Us</a></li>
-	                <li><a href="#">Services</a></li>
-	                <li><a href="#">Contact</a></li>
+	                <li><a href="#">Reporte 1</a></li>
+	                <li><a href="#">Reporte 2</a></li>
+	                <li><a href="#">Reporte 3</a></li>
+	                <li><a href="#">Reporte 3</a></li>
 	                </ul>
 	            </li>
 	        </ul>

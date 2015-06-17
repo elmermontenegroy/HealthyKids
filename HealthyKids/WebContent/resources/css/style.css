@@ -384,3 +384,11 @@ body {
   }
 }
 
+/* Personalizados */
+hr{
+	margin: 0px;
+}
+button{
+	padding: 7px 15px;
+}
+  
