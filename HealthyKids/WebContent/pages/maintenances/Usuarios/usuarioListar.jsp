@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="/WEB-INF/tld/jmesa.tld" prefix="jmesa" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
 <body>
 	<h5>Listado de usuarios</h5>
 	<hr>
-	<form>
+	<form name="frmUsuarioListar" action="UsuarioServlet" method="post">
 		Buscar por:
 		<select>
 		  <option value="nombre" selected>Nombre</option>
@@ -34,8 +35,10 @@
 		  <option value="estado">Estado</option>
 		</select>
 		<button type="button" class="medium">Buscar</button>
+		<br>
+<%-- 		<jmesa:tableModel items="" id="" var=""> --%>
+			
+<%-- 		</jmesa:tableModel> --%>
 	</form>
-	
-	
 </body>
 </html>
