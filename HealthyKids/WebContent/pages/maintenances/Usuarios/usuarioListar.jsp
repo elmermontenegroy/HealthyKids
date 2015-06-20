@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="/WEB-INF/tld/jmesa.tld" prefix="jmesa" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,24 +20,19 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/kickstart.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/javascript.js"></script>
-
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/m_Usuarios.js"></script>
+	<script type="text/javascript">paginaActual='usuarioListar';</script>
 </head>
 <body>
 	<h5>Listado de usuarios</h5>
 	<hr>
 	<form name="frmUsuarioListar" action="UsuarioServlet" method="post">
 		Buscar por:
-		<select>
-		  <option value="nombre" selected>Nombre</option>
-		  <option value="apellido">Apellido</option>
-		  <option value="usuario">Usuario</option>
-		  <option value="estado">Estado</option>
+		<select id="cboEtiquetas">
 		</select>
 		<button type="button" class="medium">Buscar</button>
 		<br>
-<%-- 		<jmesa:tableModel items="" id="" var=""> --%>
-			
-<%-- 		</jmesa:tableModel> --%>
+
 	</form>
 </body>
 </html>
