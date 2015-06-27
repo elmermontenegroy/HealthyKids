@@ -1,53 +1,38 @@
 package com.healthykids.servlets;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;	
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.healthykids.controls.Select;
-import com.healthykids.utils.ControlUtils;
-
-/**
- * Servlet implementation class UsuarioServlet
- */
 @WebServlet("/UsuarioServlet")
 public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
+	//Constructor
     public UsuarioServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
+    //Metodos para obtener los parametros enviados por un request html
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		procesar(request, response);
+		orquestador(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		procesar(request, response);
+		orquestador(request, response);
 	}
-
-	private void procesar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	
+	//Orquestador
+	private void orquestador(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String carga = request.getParameter("carga");
 		String accion = request.getParameter("accion");
-		String control = request.getParameter("control");
+		if(carga!=null){
+			cargarDatos(request, response);
+		}
 		if(accion!=null){
 			switch (accion) {
 				case "listar": listar(request, response); break;
@@ -55,36 +40,26 @@ public class UsuarioServlet extends HttpServlet {
 				case "actualizar": actualizar(request, response); break;
 			}	
 		}
-		if(control!=null){
-			switch (control) {
-				case "lcomboUsuarios": lcomboUsuarios(request, response); break;
-			}
-		}
-	}
-	//Metodos Normales
-	private void listar(HttpServletRequest request, HttpServletResponse response){
-		
-	}
-
-	private void insertar(HttpServletRequest request, HttpServletResponse response){
-		
 	}
 	
+	//Metodos de Carga
+	private void cargarDatos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		/*
+		HttpSession session = request.getSession();
+		session.setAttribute(arg0, arg1);
+		*/
+		request.setAttribute("ComboBusqueda", null);
+		request.getRequestDispatcher("/recurso").forward (request, response);
+	}
+	
+	//Metodos para Acciones Basicas
+	private void listar(HttpServletRequest request, HttpServletResponse response){
+	}
+	private void insertar(HttpServletRequest request, HttpServletResponse response){
+	}
 	private void actualizar(HttpServletRequest request, HttpServletResponse response){
-		
 	}
-	//Carga de Controles
-	private void lcomboUsuarios(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		response.setContentType("text/plain");
-		String name = request.getParameter("name");
-		PrintWriter out = response.getWriter();
-		
-		List<Select> select=new ArrayList<>();
-		select.add(new Select("nombre", "Nombre", true));
-		select.add(new Select("apellido", "Apellido", false));
-		select.add(new Select("usuario", "Usuario", false));
-		select.add(new Select("estado", "Estado", false));
-		
-		out.print(ControlUtils.fillSelect(select));	
-	}
+	
+	//Obtener y Establecer
+	
 }

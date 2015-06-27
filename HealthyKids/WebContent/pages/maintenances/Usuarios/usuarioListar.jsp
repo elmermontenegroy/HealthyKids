@@ -28,6 +28,18 @@
 	<hr>
 	<form name="frmUsuarioListar" action="UsuarioServlet" method="post">
 		Buscar por:
+		<select>
+		  <option value="volvo">Volvo</option>
+		  <option value="saab">Saab</option>
+		  <option value="mercedes">Mercedes</option>
+		  <option value="audi">Audi</option>
+			<c:forEach var="i" begin="1" end="5">
+			   Item <c:out value="${i}"/><p>
+			</c:forEach>
+		</select>
+		
+		
+		
 		<select id="cboEtiquetas">
 		</select>
 		<button type="button" class="medium">Buscar</button>

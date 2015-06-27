@@ -1,12 +1,13 @@
 var paginaActual;
 
 $(document).ready(function() {
+	/*
     console.log(paginaActual);
     switch (paginaActual) {
 	case "usuarioListar": cargarUsuarioListar(); break;
 	case "usuarioRegistrar": cargarUsuarioRegistrar(); break;
 	case "usuarioActualizar": cargarUsuarioActualizar(); break;
-	}
+	}*/
 });
 
 /*
