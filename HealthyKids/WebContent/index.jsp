@@ -7,6 +7,6 @@
 <title>Healthy Kids</title>
 </head>
 <body>
-	<jsp:forward page="pages/security/login.jsp"></jsp:forward>
+	<jsp:forward page="pages/security/login.jsp?idioma=en"></jsp:forward>
 </body>
 </html>

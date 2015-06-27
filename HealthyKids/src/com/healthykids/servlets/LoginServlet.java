@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("datos",usuario);
 
 		} else {
-			rd = request.getRequestDispatcher("/pages/security/login.jsp");
+			rd = request.getRequestDispatcher("/pages/security/login.jsp?idioma=en");
 			request.setAttribute("mensaje", "Usuario o contraseña incorrectos");
 		}
 
