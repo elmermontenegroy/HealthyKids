@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="/WEB-INF/customTags.tld" prefix="ct" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,27 +24,14 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/kickstart.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/javascript.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/m_Usuarios.js"></script>
-	<script type="text/javascript">paginaActual='usuarioListar';</script>
+	
 </head>
 <body>
 	<h5>Listado de usuarios</h5>
 	<hr>
 	<form name="frmUsuarioListar" action="UsuarioServlet" method="post">
 		Buscar por:
-		<select>
-		  <option value="volvo">Volvo</option>
-		  <option value="saab">Saab</option>
-		  <option value="mercedes">Mercedes</option>
-		  <option value="audi">Audi</option>
-			<c:forEach var="i" begin="1" end="5">
-			   Item <c:out value="${i}"/><p>
-			</c:forEach>
-		</select>
-		
-		
-		
-		<select id="cboEtiquetas">
-		</select>
+		<ct:select nombre="manUsuBuscar"/>
 		<button type="button" class="medium">Buscar</button>
 		<br>
 

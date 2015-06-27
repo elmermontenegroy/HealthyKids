@@ -1,13 +1,16 @@
 package com.healthykids.servlets;
 
-import java.io.IOException;	
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+	
 
 @WebServlet("/UsuarioServlet")
 public class UsuarioServlet extends HttpServlet {
@@ -51,6 +54,8 @@ public class UsuarioServlet extends HttpServlet {
 		request.setAttribute("ComboBusqueda", null);
 		request.getRequestDispatcher("/recurso").forward (request, response);
 	}
+	
+	
 	
 	//Metodos para Acciones Basicas
 	private void listar(HttpServletRequest request, HttpServletResponse response){
