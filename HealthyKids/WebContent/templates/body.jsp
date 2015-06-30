@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<!DOCTYPE html>
 <html>
 	<head>
 	
@@ -16,7 +17,7 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css" media="all" />
 			
 		<!-- Javascript -->
-		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/kickstart.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/javascript.js"></script>
 	

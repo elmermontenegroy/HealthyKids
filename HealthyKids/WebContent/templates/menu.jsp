@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<!DOCTYPE html>
 <html>
 	<head>
 	
@@ -16,7 +17,7 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css" media="all" />
 			
 		<!-- Javascript -->
-		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/kickstart.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/javascript.js"></script>
 		
@@ -27,15 +28,15 @@
 	        <ul>
 	            <li class="dropdown">
 	                <input type="checkbox" />
-	                <a href="#" data-toggle="dropdown">Mantenimientos</a>
+	                <a href="#" data-toggle="dropdown"><fmt:message key="m_maintenances" /></a>
 	                <ul class="dropdown-menu">
-	                <li><a href="${pageContext.request.contextPath}/pages/maintenances/Perfiles/perfilListar.jsp" target="body">Perfiles</a></li>
-	                <li><a href="${pageContext.request.contextPath}/pages/maintenances/Usuarios/usuarioListar.jsp" target="body">Usuarios</a></li>
+	                <li><a href="${pageContext.request.contextPath}/pages/maintenances/Perfiles/perfilListar.jsp" target="body"><fmt:message key="m_profiles" /></a></li>
+	                <li><a href="${pageContext.request.contextPath}/UsuarioServlet?carga=cargarListar" target="body"><fmt:message key="m_users" /></a></li>
 	                </ul>
 	            </li>
 	            <li class="dropdown">
 	                <input type="checkbox" />
-	                <a href="#" data-toggle="dropdown">Reportes</a>
+	                <a href="#" data-toggle="dropdown"><fmt:message key="r_reports" /></a>
 	                <ul class="dropdown-menu">
 	                <li><a href="#">Reporte 1</a></li>
 	                <li><a href="#">Reporte 2</a></li>

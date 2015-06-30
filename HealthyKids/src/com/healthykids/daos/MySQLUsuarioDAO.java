@@ -105,7 +105,7 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
 		
 		try {
 			con = MySQLConexion.getConexion();
-			sp = "{call sp_Usuario_Listar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+			sp = "{call sp_usuario_listar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 			cst = con.prepareCall(sp);
 			
 			cst.setInt(1, usuario.getUsuarioId()!=null?usuario.getUsuarioId():0);

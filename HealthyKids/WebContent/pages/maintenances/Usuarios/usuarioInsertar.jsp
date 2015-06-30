@@ -34,54 +34,23 @@
 	
 </head>
 <body>
-	<form name="frmUsuarioListar">
+	<form name="frmUsuarioInsertar">
 		<div class="base">
 			
 			<div class="cabecera">
-				<h5><fmt:message key="mu_title_list" /></h5>
-				<fmt:message key="g_searchfor" />: 
-				<select id="cboBusqueda" name="cboBusqueda">
-					<option value='0' selected ><fmt:message key="tb_user_name" /></option>
-					<option value='1'><fmt:message key="tb_user_lastname" /></option>
-					<option value='2'><fmt:message key="tb_user_user" /></option>
-				</select>
-				<input id="txtBusqueda" name="txtBusqueda" type="text">
-				<button type="submit" class="medium" formmethod="post" formaction="${pageContext.request.contextPath}/UsuarioServlet?accion=listar"><fmt:message key="g_search" /></button>
+				<h5><fmt:message key="mu_title_insert" /></h5>
 				<hr>
 			</div>
-			
+		
 			<div class="cuerpo">
-				<table id="tblMUsuarioListar" class="display" cellspacing="0" width="100%">
-				    <thead>
-				        <tr>
-				            <th><fmt:message key="tb_user_name" /></th>
-				            <th><fmt:message key="tb_user_lastname" /></th>
-				            <th><fmt:message key="tb_user_dateofbirth" /></th>
-				            <th><fmt:message key="tb_user_dateofadmission" /></th>
-				            <th><fmt:message key="tb_user_user" /></th>
-				            <th><fmt:message key="tb_user_phone" /></th>
-				            <th><fmt:message key="tb_user_email" /></th>
-				        </tr>
-				    </thead>
-				    <tbody>
-						<c:forEach var="usuario" items="${listUsuario}">
-							<tr>
-					            <td>${usuario.nombre}</td>
-								<td>${usuario.apellido}</td>
-								<td>${usuario.fechaNacimiento}</td>
-								<td>${usuario.fechaIngreso}</td>
-								<td>${usuario.usuario}</td>
-								<td>${usuario.telefono}</td>
-								<td>${usuario.email}</td>
-					        </tr>
-						</c:forEach>
-					</tbody>
-				</table>
+				<fieldset> 				
+					<legend>Formulario</legend>
+				</fieldset>
 			</div>
 			
 			<div class="pie">
 				<hr>
-				<button type="submit" class="medium" formmethod="post" formaction="${pageContext.request.contextPath}/UsuarioServlet?carga=cargarInsertar"><fmt:message key="g_add" /></button>
+				<button type="submit" class="medium" formmethod="post" formaction="${pageContext.request.contextPath}/UsuarioServlet?carga=cargarInsertar"><fmt:message key="g_save" /></button>
 			</div>	
 		</div>
 	</form>

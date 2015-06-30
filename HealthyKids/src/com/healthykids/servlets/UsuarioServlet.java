@@ -1,7 +1,6 @@
 package com.healthykids.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.healthykids.beans.UsuarioDTO;
+import com.healthykids.services.UsuarioService;
 
 	
 
@@ -34,7 +37,11 @@ public class UsuarioServlet extends HttpServlet {
 		String carga = request.getParameter("carga");
 		String accion = request.getParameter("accion");
 		if(carga!=null){
-			cargarDatos(request, response);
+			switch (carga) {
+			case "cargarListar": cargarListar(request, response); break;
+			case "cargarInsertar": cargarInsertar(request, response); break;
+			case "cargarActualizar": cargarActualizar(request, response); break;
+			}
 		}
 		if(accion!=null){
 			switch (accion) {
@@ -46,23 +53,60 @@ public class UsuarioServlet extends HttpServlet {
 	}
 	
 	//Metodos de Carga
-	private void cargarDatos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		/*
-		HttpSession session = request.getSession();
-		session.setAttribute(arg0, arg1);
-		*/
-		request.setAttribute("ComboBusqueda", null);
-		request.getRequestDispatcher("/recurso").forward (request, response);
+	private void cargarListar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		System.out.println("cargarListar - inicio");
+		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioListar.jsp").forward (request, response);
+		System.out.println("cargarListar - fin");
 	}
-	
-	
+	private void cargarInsertar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		System.out.println("cargarInsertar - inicio");
+		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioInsertar.jsp").forward (request, response);
+		System.out.println("cargarInsertar - fin");
+	}
+	private void cargarActualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		System.out.println("cargarActualizar - inicio");
+		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioActualizar.jsp").forward (request, response);
+		System.out.println("cargarActualizar - fin");
+	}
 	
 	//Metodos para Acciones Basicas
 	private void listar(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("listar - inicio");
+		UsuarioService servicioUsuario = new UsuarioService();
+		List<UsuarioDTO> listUsuario; 
+		UsuarioDTO usuario;
+		try {
+			int cboBusqueda = Integer.parseInt(request.getParameter("cboBusqueda"));
+			String txtBusqueda = request.getParameter("txtBusqueda");
+			usuario = new UsuarioDTO();
+			usuario.setEstado("A");
+			
+			switch (cboBusqueda) {
+				case 0: usuario.setNombre(txtBusqueda);break;
+				case 1: usuario.setApellido(txtBusqueda);break;
+				case 2: usuario.setUsuario(txtBusqueda);break;
+			}
+			
+			listUsuario = servicioUsuario.listar(usuario);
+			request.setAttribute("listUsuario", listUsuario);
+			//request.getSession().setAttribute("carro", listUsuario);
+			request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioListar.jsp").forward (request, response);
+			
+		} catch (Exception e) {
+			System.out.println("Error: "+e.getMessage().toString());
+		}
+		System.out.println("listar - fin");
 	}
 	private void insertar(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("insertar - inicio");
+		
+		System.out.println("insertar - fin");
+
 	}
 	private void actualizar(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("actualizar - inicio");
+		
+		System.out.println("actualizar - fin");
 	}
 	
 	//Obtener y Establecer
