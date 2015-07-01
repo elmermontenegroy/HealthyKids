@@ -1,6 +1,8 @@
 package com.healthykids.servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,8 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.healthykids.beans.PerfilDTO;
 import com.healthykids.beans.UsuarioDTO;
 import com.healthykids.services.UsuarioService;
 
@@ -97,11 +99,29 @@ public class UsuarioServlet extends HttpServlet {
 		}
 		System.out.println("listar - fin");
 	}
-	private void insertar(HttpServletRequest request, HttpServletResponse response){
+	private void insertar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("insertar - inicio");
+		UsuarioService servicioUsuario = new UsuarioService();
+		UsuarioDTO user;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		
+		try {
+			String nombre = request.getParameter("txtnombre");
+			String apellido = request.getParameter("txtapellido");
+			Date fechaNacimiento = formatter.parse(request.getParameter("txtfechanacimiento"));
+			String usuario = request.getParameter("txtusuario");
+			String clave = request.getParameter("txtclave");
+			int telefono = Integer.parseInt(request.getParameter("txttelefono"));
+			String email = request.getParameter("txtcorreo");
+			
+			user = new UsuarioDTO(null, nombre, apellido, fechaNacimiento, new Date(), null, usuario, clave, telefono, email, "A");
+			servicioUsuario.insertar(user);
+			
+		} catch (Exception e) {
+			System.out.println("Error en UsuarioServlet - insertar");
+		}
+		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioListar.jsp").forward (request, response);
 		System.out.println("insertar - fin");
-
 	}
 	private void actualizar(HttpServletRequest request, HttpServletResponse response){
 		System.out.println("actualizar - inicio");

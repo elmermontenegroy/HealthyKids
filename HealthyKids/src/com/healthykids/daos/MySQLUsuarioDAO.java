@@ -25,19 +25,19 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
 		
 		try {
 			con = MySQLConexion.getConexion();
-			sp ="{call sp_Usuario_Insertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+			sp ="{call sp_usuario_insertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 			cst = con.prepareCall(sp);
 			
-			cst.setString(1, usuario.getNombre());
-			cst.setString(2, usuario.getApellido());
-			cst.setString(3, FechaUtils.dateToStringShort(usuario.getFechaNacimiento()));
-			cst.setString(4, FechaUtils.dateToStringShort(usuario.getFechaIngreso()));
-			cst.setInt(5, usuario.getPerfil().getPerfilId());
-			cst.setString(6, usuario.getUsuario());
-			cst.setString(7, usuario.getClave());
-			cst.setInt(8, usuario.getTelefono());
-			cst.setString(9, usuario.getEmail());
-			cst.setString(10, usuario.getEstado());
+			cst.setString(1, usuario.getNombre()!=null?usuario.getNombre():"");
+			cst.setString(2, usuario.getApellido()!=null?usuario.getApellido():"");
+			cst.setString(3, usuario.getFechaNacimiento()!=null?FechaUtils.dateToStringShort(usuario.getFechaNacimiento()):"");
+			cst.setString(4, usuario.getFechaIngreso()!=null?FechaUtils.dateToStringShort(usuario.getFechaIngreso()):"");
+			cst.setInt(5, usuario.getPerfil()!=null?usuario.getPerfil().getPerfilId():0);
+			cst.setString(6, usuario.getUsuario()!=null?usuario.getUsuario():"");
+			cst.setString(7, usuario.getClave()!=null?usuario.getClave():"");
+			cst.setInt(8, usuario.getTelefono()!=null?usuario.getTelefono():0);
+			cst.setString(9, usuario.getEmail()!=null?usuario.getEmail():"");
+			cst.setString(10, usuario.getEstado()!=null?usuario.getEstado():"");
 			
 			result = cst.executeUpdate();
 			
