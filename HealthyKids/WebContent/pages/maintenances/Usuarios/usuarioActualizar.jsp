@@ -1,48 +1,91 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<!-- enlazo el archivo con las css ubicado en... -->
-<link type="text/css" rel="stylesheet" href="estilos/estilos.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
+	<!-- META -->
+	<title>Healthy Kids - Niños Saludables solo con nosotros :D</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content="" />
+
+	<!-- CSS --> 
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/normalize.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/kickstart.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/jquery.dataTables.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css" media="all" />
+		
+	<!-- Javascript -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/kickstart.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/javascript.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#tblMUsuarioListar').DataTable({
+				"lengthMenu": [[5, 10], [5, 10]]
+			});
+		});
+	</script>
+	
 </head>
 <body>
-	<h1>Actualización de datos de usuarios</h1>
-	<hr>
-	<fieldset> 				<!-- define un panel de grupo -->
-		<legend>Formulario</legend>
-		<form action="actualizando" method="post">   	<!-- inicia el formulario -->
+	<form name="frmUsuarioInsertar">
+		<div class="base">
+			
+			<div class="cabecera">
+				<h5><fmt:message key="mu_title_update" /></h5>
+				<hr>
+			</div>
 		
-			<label>Usuario:</label>		
-			<input type="text" name="txtUsuario" size="4" maxlength="4" 
-			       placeholder="Usuario" required="required"><br>
-			<br>
+			<div class="cuerpo">
+				<fieldset> 				
+					<legend>Formulario</legend>
+					<table>
+						<tr>
+							<td><fmt:message key="tb_user_name" /></td>
+							<td><input id="txtnombre" name="txtnombre" type="text" size="30" maxlength="30" required="required" value="${usuario.nombre}"></td>
+							<td><fmt:message key="tb_user_lastname" /></td>
+							<td><input id="txtapellido" name="txtapellido" type="text" size="50" maxlength="50"  required="required" value="${usuario.apellido}"></td>
+						</tr>
+						<tr>
+							<td><fmt:message key="tb_user_user" /></td>
+							<td><input id="txtusuario" name="txtusuario" type="text" size="20" maxlength="20" required="required" value="${usuario.usuario}"></td>
+							<td><fmt:message key="tb_user_password" /></td>
+							<td><input id="txtclave" name="txtclave" type="password" size="20" maxlength="20" required="required" value="${usuario.usuario}"></td>
+						</tr>
+						
+						<tr>
+							<td><fmt:message key="tb_user_dateofbirth" /></td>
+							<td><input id="txtfechanacimiento" name="txtfechanacimiento" type="date" required="required"></td>
+							<td><fmt:message key="tb_profile_profile" /></td>
+							<td>				
+								<select id="cboPerfil" name="cboPerfil" >
+									<c:forEach var="item" items="${listPerfiles}">
+										<option value='${item.perfilId}'>${item.descripcion}</option>
+									</c:forEach>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td><fmt:message key="tb_user_phone" /></td>
+							<td><input id="txttelefono" name="txttelefono" type="text" size="8" maxlength="9" required="required" value="${usuario.telefono}"></td>
+							<td><fmt:message key="tb_user_email" /></td>
+							<td><input id="txtcorreo" name="txtcorreo" type="email" size="50" maxlength="50" required="required" value="${usuario.email}"></td>
+						</tr>
+					</table>
+				</fieldset>
+			</div>
 			
-			
-			<label>Cambiar Nombre:</label>		
-			<input type="text" name="txtNombre" size="35" 
-			       placeholder="Nombre" required="required"><br>
-			<label>Cambiar Apellido:</label>		
-			<input type="text" name="txtApellido" size="50" 
-			       placeholder="Apellidos" required="required"><br>
-			<label>Cambiar Password:</label> 	
-			<input type="password" name="txtClave" size="5" maxlength="5"
-			       placeholder="Clave" required="required"><br>
-			      
-			<!-- aplico estilo al boton usando el atributo class-->
-			<input type="submit" value="Actualizar" class="button">
-			 
-			<input type="reset" value="Limpiar">
-		</form>
-	</fieldset>
-	<!-- mostraremos el mensaje enviado por el Servlet logueo -->
-	<%
-		String mensaje = (String) request.getAttribute("mensaje");
-		if (mensaje != null)
-			out.println("<center>" + mensaje + "</center>");
-	%>
+			<div class="pie">
+				<hr>
+				<button type="submit" class="medium" formmethod="post" formaction="${pageContext.request.contextPath}/UsuarioServlet?accion=insertar"><fmt:message key="g_save" /></button>
+			</div>	
+		</div>
+	</form>
 </body>
 </html>

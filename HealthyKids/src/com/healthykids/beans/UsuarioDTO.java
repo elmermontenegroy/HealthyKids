@@ -27,6 +27,10 @@ public class UsuarioDTO {
 		this.usuario = usuario;
 		this.clave = clave;
 	}
+	
+	public UsuarioDTO(Integer usuarioId) {
+		this.usuarioId = usuarioId;
+	}
 
 	public UsuarioDTO(Integer usuarioId, String nombre, String apellido,
 			Date fechaNacimiento, Date fechaIngreso, PerfilDTO perfil,

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.healthykids.beans.PerfilDTO;
 import com.healthykids.beans.UsuarioDTO;
+import com.healthykids.services.PerfilService;
 import com.healthykids.services.UsuarioService;
 
 	
@@ -62,11 +63,24 @@ public class UsuarioServlet extends HttpServlet {
 	}
 	private void cargarInsertar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("cargarInsertar - inicio");
+		List <PerfilDTO> lista;
+		PerfilService servicioPerfil = new PerfilService();
+		lista=servicioPerfil.listar(new PerfilDTO());
+		request.setAttribute("listPerfiles", lista);
 		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioInsertar.jsp").forward (request, response);
 		System.out.println("cargarInsertar - fin");
 	}
 	private void cargarActualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("cargarActualizar - inicio");
+		PerfilService servicioPerfil = new PerfilService();
+		UsuarioService servicioUsuario = new UsuarioService();
+		UsuarioDTO usuario;
+		List <PerfilDTO> lista;
+		lista=servicioPerfil.listar(new PerfilDTO());
+		int user = Integer.parseInt(request.getParameter("usuarioId"));
+		usuario = servicioUsuario.listar(new UsuarioDTO(user)).get(0);
+		request.setAttribute("listPerfiles", lista);
+		request.setAttribute("usuario", usuario);
 		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioActualizar.jsp").forward (request, response);
 		System.out.println("cargarActualizar - fin");
 	}
@@ -108,13 +122,14 @@ public class UsuarioServlet extends HttpServlet {
 		try {
 			String nombre = request.getParameter("txtnombre");
 			String apellido = request.getParameter("txtapellido");
-			Date fechaNacimiento = formatter.parse(request.getParameter("txtfechanacimiento"));
 			String usuario = request.getParameter("txtusuario");
 			String clave = request.getParameter("txtclave");
+			Date fechaNacimiento = formatter.parse(request.getParameter("txtfechanacimiento"));
+			int perfilId = Integer.parseInt(request.getParameter("cboPerfil"));
 			int telefono = Integer.parseInt(request.getParameter("txttelefono"));
 			String email = request.getParameter("txtcorreo");
 			
-			user = new UsuarioDTO(null, nombre, apellido, fechaNacimiento, new Date(), null, usuario, clave, telefono, email, "A");
+			user = new UsuarioDTO(null, nombre, apellido, fechaNacimiento, new Date(), new PerfilDTO(perfilId), usuario, clave, telefono, email, "A");
 			servicioUsuario.insertar(user);
 			
 		} catch (Exception e) {

@@ -62,14 +62,20 @@
 						<tr>
 							<td><fmt:message key="tb_user_dateofbirth" /></td>
 							<td><input id="txtfechanacimiento" name="txtfechanacimiento" type="date" required="required"></td>
-							<td><fmt:message key="tb_user_phone" /></td>
-							<td><input id="txttelefono" name="txttelefono" type="text" size="8" maxlength="9" required="required"></td>
+							<td><fmt:message key="tb_profile_profile" /></td>
+							<td>				
+								<select id="cboPerfil" name="cboPerfil">
+									<c:forEach var="item" items="${listPerfiles}">
+										<option value='${item.perfilId}'>${item.descripcion}</option>
+									</c:forEach>
+								</select>
+							</td>
 						</tr>
 						<tr>
+							<td><fmt:message key="tb_user_phone" /></td>
+							<td><input id="txttelefono" name="txttelefono" type="text" size="8" maxlength="9" required="required"></td>
 							<td><fmt:message key="tb_user_email" /></td>
 							<td><input id="txtcorreo" name="txtcorreo" type="email" size="50" maxlength="50" required="required"></td>
-							<td></td>
-							<td></td>
 						</tr>
 					</table>
 				</fieldset>

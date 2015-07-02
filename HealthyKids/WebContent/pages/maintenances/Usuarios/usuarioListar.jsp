@@ -66,7 +66,7 @@
 				    <tbody>
 						<c:forEach var="usuario" items="${listUsuario}">
 							<tr>
-					            <td>${usuario.nombre}</td>
+					            <td><a href="${pageContext.request.contextPath}/UsuarioServlet?carga=cargarActualizar&usuarioId=${usuario.usuarioId}" target="body">${usuario.nombre}</a></td>
 								<td>${usuario.apellido}</td>
 								<td>${usuario.fechaNacimiento}</td>
 								<td>${usuario.fechaIngreso}</td>

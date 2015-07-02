@@ -10,6 +10,11 @@ public class PerfilDTO {
 	//Constructors
 	public PerfilDTO() {
 	}
+	
+	public PerfilDTO(Integer perfilId) {
+		this.perfilId = perfilId;
+	}
+
 	public PerfilDTO(Integer perfilId, String descripcion, String estado) {
 		this.perfilId = perfilId;
 		this.descripcion = descripcion;

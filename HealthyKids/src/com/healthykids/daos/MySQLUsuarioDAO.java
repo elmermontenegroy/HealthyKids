@@ -170,6 +170,7 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
 		
 		return result;
 	}
+	
 	//Otros Metodos
 	public UsuarioDTO loguear(UsuarioDTO usuario) {
 
