@@ -56,19 +56,20 @@
 							<td><fmt:message key="tb_user_user" /></td>
 							<td><input id="txtusuario" name="txtusuario" type="text" size="20" maxlength="20" required="required" value="${usuario.usuario}"></td>
 							<td><fmt:message key="tb_user_password" /></td>
-							<td><input id="txtclave" name="txtclave" type="password" size="20" maxlength="20" required="required" value="${usuario.usuario}"></td>
+							<td><input id="txtclave" name="txtclave" type="password" size="20" maxlength="20" required="required"></td>
 						</tr>
 						
 						<tr>
 							<td><fmt:message key="tb_user_dateofbirth" /></td>
-							<td><input id="txtfechanacimiento" name="txtfechanacimiento" type="date" required="required"></td>
+							<td><input id="txtfechanacimiento" name="txtfechanacimiento" type="date" required="required" value="${fechaNacimiento}"></td>
 							<td><fmt:message key="tb_profile_profile" /></td>
 							<td>				
 								<select id="cboPerfil" name="cboPerfil" >
 									<c:forEach var="item" items="${listPerfiles}">
-										<option value='${item.perfilId}'>${item.descripcion}</option>
+										<option value='${item.perfilId}' ${(item.perfilId == usuario.perfil.perfilId) ? 'selected' : ''} >${item.descripcion}</option>
 									</c:forEach>
 								</select>
+								
 							</td>
 						</tr>
 						<tr>
@@ -84,6 +85,7 @@
 			<div class="pie">
 				<hr>
 				<button type="submit" class="medium" formmethod="post" formaction="${pageContext.request.contextPath}/UsuarioServlet?accion=insertar"><fmt:message key="g_save" /></button>
+				<button type="submit" class="medium" formmethod="post" formaction="${pageContext.request.contextPath}/UsuarioServlet?accion=refrescar" formnovalidate ><fmt:message key="g_cancel" /></button>
 			</div>	
 		</div>
 	</form>

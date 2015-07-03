@@ -84,6 +84,7 @@
 			<div class="pie">
 				<hr>
 				<button type="submit" class="medium" formmethod="post" formaction="${pageContext.request.contextPath}/UsuarioServlet?accion=insertar"><fmt:message key="g_save" /></button>
+				<button type="submit" class="medium" formmethod="post" formaction="${pageContext.request.contextPath}/UsuarioServlet?accion=refrescar" formnovalidate ><fmt:message key="g_cancel" /></button>
 			</div>	
 		</div>
 	</form>

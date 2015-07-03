@@ -27,7 +27,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#tblMUsuarioListar').DataTable({
-				"lengthMenu": [[5, 10], [5, 10]]
+				"lengthMenu": [[10], [10]]
 			});
 		});
 	</script>
