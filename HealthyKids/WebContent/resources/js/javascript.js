@@ -13,3 +13,7 @@ function fillSelect(id,data){
 	}
 	element.append(html);
 }
+// Mantenimiento de Usuarios
+$( "#btnUsuarioEliminar" ).click(function() {
+	  alert( "Handler for .click() called." );
+});

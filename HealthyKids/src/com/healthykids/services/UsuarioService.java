@@ -22,8 +22,8 @@ public class UsuarioService {
 		return objUsuarioDAO.listar(usuario);
 	}
 	
-	public int eliminar(Integer usuarioId){
-		return objUsuarioDAO.eliminar(usuarioId);
+	public int eliminar(String usuariosId){
+		return objUsuarioDAO.eliminar(usuariosId);
 	}
 	
 	//Otros Metodos

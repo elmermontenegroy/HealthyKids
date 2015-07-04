@@ -27,10 +27,7 @@ public class SessionListener implements HttpSessionListener {
      */
     public void sessionCreated(HttpSessionEvent arg0)  { 
          // TODO Auto-generated method stub
-    	// -- crear la variable global "lista de usuarios"
-        ArrayList<UsuarioDTO> lista = new ArrayList<>();
-        arg0.getSession().setAttribute("listUsuario", lista);
-        System.out.println("Paso por la Session");
+        System.out.println("SessionListener - SessionId: "+arg0.getSession().getId());
     }
 
 	/**

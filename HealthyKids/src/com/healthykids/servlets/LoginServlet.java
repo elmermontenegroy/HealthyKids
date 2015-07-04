@@ -20,37 +20,42 @@ public class LoginServlet extends HttpServlet {
 	//Constructor
     public LoginServlet() {
         super();
+        System.out.println("LoginServlet - Constructor");
     }
     
     //Metodos para obtener los parametros enviados por un request html
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		procesar(request, response);
+		orquestador(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		procesar(request, response);
+		orquestador(request, response);
 	}
 	
 	//Orquestador
-	private void procesar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		// variables de captura de datos
+	private void orquestador(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String accion = request.getParameter("accion");
+		if(accion!=null){
+			switch (accion) {
+				case "login": login(request, response); break;
+				case "logout": logout(request, response); break;
+			}	
+		}
+	}
+	
+	//Metodos para Acciones Basicas
+	private void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		UsuarioService servicio = new UsuarioService();
+
 		String user = request.getParameter("txtUsuario");
 		String pass = request.getParameter("txtClave");
 				
-		// -- Busca el usuario y clave en la BD
-		UsuarioService servicio = new UsuarioService();
 		UsuarioDTO usuario = servicio.loguear(new UsuarioDTO(user, pass));
 
-		// -- nos envia a la pagina bienvenido.jps junto a un mensaje
 		RequestDispatcher rd;
 		if (usuario!=null) {
-			rd = request.getRequestDispatcher("templates/master.jsp");
-			
-			//atributo que reconoce todo
+			rd = request.getRequestDispatcher("/templates/master.jsp");
 			HttpSession sesion= request.getSession();
-			System.out.println("Mi sesion iniciada es: "+ sesion.getId());
 			sesion.setAttribute("usuario",usuario);
-			request.setAttribute("datos",usuario);
-
 		} else {
 			rd = request.getRequestDispatcher("/pages/security/login.jsp?idioma=en");
 			request.setAttribute("mensaje", "Usuario o contraseña incorrectos");
@@ -58,6 +63,10 @@ public class LoginServlet extends HttpServlet {
 
 		rd.forward(request, response);
 
+	}
+	private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		request.getSession().invalidate();
+		request.getRequestDispatcher("/pages/security/login.jsp?idioma=en").forward (request, response);
 	}
 
 }

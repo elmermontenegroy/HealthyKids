@@ -27,7 +27,7 @@
 	<a href="${pageContext.request.contextPath}/pages/security/login.jsp?idioma=en">ingles</a>
 	<a href="${pageContext.request.contextPath}/pages/security/login.jsp?idioma=es">español</a>
 	
-	<form name="frmlogueo" method="post" action="${pageContext.request.contextPath}/LoginServlet">
+	<form name="frmlogueo" method="post" action="${pageContext.request.contextPath}/LoginServlet?accion=login">
 		<fieldset>
 			<legend>
 				<span><fmt:message key="l_access" /></span>

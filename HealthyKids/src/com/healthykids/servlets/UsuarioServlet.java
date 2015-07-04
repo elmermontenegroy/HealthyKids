@@ -27,6 +27,7 @@ public class UsuarioServlet extends HttpServlet {
 	//Constructor
     public UsuarioServlet() {
         super();
+        System.out.println("UsuarioServlet - Constructor");
     }
     
     //Metodos para obtener los parametros enviados por un request html
@@ -50,20 +51,16 @@ public class UsuarioServlet extends HttpServlet {
 		}
 		if(accion!=null){
 			switch (accion) {
-				case "listar": listar(request, response); break;
 				case "insertar": insertar(request, response); break;
 				case "actualizar": actualizar(request, response); break;
+				case "listar": listar(request, response); break;
+				case "eliminar": eliminar(request, response); break;
 				case "refrescar": refrescar(request, response); break;
 			}	
 		}
 	}
 	
 	//Metodos de Carga
-	private void cargarListar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		System.out.println("cargarListar - inicio");
-		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioListar.jsp").forward (request, response);
-		System.out.println("cargarListar - fin");
-	}
 	private void cargarInsertar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("cargarInsertar - inicio");
 		List <PerfilDTO> lista;
@@ -88,35 +85,13 @@ public class UsuarioServlet extends HttpServlet {
 		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioActualizar.jsp").forward (request, response);
 		System.out.println("cargarActualizar - fin");
 	}
-	
-	//Metodos para Acciones Basicas
-	private void listar(HttpServletRequest request, HttpServletResponse response){
-		System.out.println("listar - inicio");
-		UsuarioService servicioUsuario = new UsuarioService();
-		List<UsuarioDTO> listUsuario; 
-		UsuarioDTO usuarioBuscado;
-		try {
-			int cboBusqueda = Integer.parseInt(request.getParameter("cboBusqueda"));
-			String txtBusqueda = request.getParameter("txtBusqueda");
-			usuarioBuscado = new UsuarioDTO();
-			usuarioBuscado.setEstado("A");
-			
-			switch (cboBusqueda) {
-				case 0: usuarioBuscado.setNombre(txtBusqueda);break;
-				case 1: usuarioBuscado.setApellido(txtBusqueda);break;
-				case 2: usuarioBuscado.setUsuario(txtBusqueda);break;
-			}
-			
-			listUsuario = servicioUsuario.listar(usuarioBuscado);
-			request.setAttribute("listUsuario", listUsuario);
-			request.getSession().setAttribute("usuarioBuscado", usuarioBuscado);
-			request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioListar.jsp").forward (request, response);
-			
-		} catch (Exception e) {
-			System.out.println("Error: "+e.getMessage().toString());
-		}
-		System.out.println("listar - fin");
+	private void cargarListar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		System.out.println("cargarListar - inicio");
+		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioListar.jsp").forward (request, response);
+		System.out.println("cargarListar - fin");
 	}
+
+	//Metodos para Acciones Basicas
 	private void insertar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("insertar - inicio");
 		UsuarioService servicioUsuario = new UsuarioService();
@@ -143,8 +118,63 @@ public class UsuarioServlet extends HttpServlet {
 	}
 	private void actualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("actualizar - inicio");
+		UsuarioService servicioUsuario = new UsuarioService();
+		UsuarioDTO user;
+		
+		try {
+			int usuarioId = Integer.parseInt(request.getParameter("txtUsuarioId"));
+			String nombre = request.getParameter("txtnombre");
+			String apellido = request.getParameter("txtapellido");
+			String usuario = request.getParameter("txtusuario");
+			String clave = request.getParameter("txtclave");
+			Date fechaNacimiento = FechaUtils.stringToDateFormato(request.getParameter("txtfechanacimiento"), "yyyy-MM-dd");
+			int perfilId = Integer.parseInt(request.getParameter("cboPerfil"));
+			int telefono = Integer.parseInt(request.getParameter("txttelefono"));
+			String email = request.getParameter("txtcorreo");
+			
+			user = new UsuarioDTO(usuarioId, nombre, apellido, fechaNacimiento, new Date(), new PerfilDTO(perfilId), usuario, clave, telefono, email, "A");
+			servicioUsuario.actualizar(user);
+			
+		} catch (Exception e) {
+			System.out.println("Error en UsuarioServlet - actualizar - "+e.getMessage());
+		}
 		refrescar(request, response);
 		System.out.println("actualizar - fin");
+	}
+	private void listar(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("listar - inicio");
+		UsuarioService servicioUsuario = new UsuarioService();
+		List<UsuarioDTO> listUsuario; 
+		UsuarioDTO usuarioBuscado;
+		try {
+			int cboBusqueda = Integer.parseInt(request.getParameter("cboBusqueda"));
+			String txtBusqueda = request.getParameter("txtBusqueda");
+			usuarioBuscado = new UsuarioDTO();
+			usuarioBuscado.setEstado("A");
+			
+			switch (cboBusqueda) {
+				case 0: usuarioBuscado.setNombre(txtBusqueda);break;
+				case 1: usuarioBuscado.setApellido(txtBusqueda);break;
+				case 2: usuarioBuscado.setUsuario(txtBusqueda);break;
+			}
+			
+			listUsuario = servicioUsuario.listar(usuarioBuscado);
+			request.setAttribute("listUsuario", listUsuario);
+			request.getSession().setAttribute("usuarioBuscado", usuarioBuscado);
+			request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioListar.jsp").forward (request, response);
+			
+		} catch (Exception e) {
+			System.out.println("Error en UsuarioServlet - listar - "+e.getMessage());
+		}
+		System.out.println("listar - fin");
+	}
+	private void eliminar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		System.out.println("eliminar - inicio");
+		UsuarioService servicioUsuario = new UsuarioService();
+		String usuariosEliminar = request.getParameter("txtUsuariosEliminar");
+		servicioUsuario.eliminar(usuariosEliminar);
+		refrescar(request, response);
+		System.out.println("eliminar - fin");
 	}
 	private void refrescar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		HttpSession session = request.getSession();
@@ -159,7 +189,4 @@ public class UsuarioServlet extends HttpServlet {
 		}
 		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioListar.jsp").forward (request, response);
 	}
-
-	//Obtener y Establecer
-	
 }

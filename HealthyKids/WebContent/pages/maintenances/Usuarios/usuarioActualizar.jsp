@@ -24,13 +24,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/kickstart.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/javascript.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#tblMUsuarioListar').DataTable({
-				"lengthMenu": [[5, 10], [5, 10]]
-			});
-		});
-	</script>
 	
 </head>
 <body>
@@ -45,6 +38,7 @@
 			<div class="cuerpo">
 				<fieldset> 				
 					<legend>Formulario</legend>
+					<input type="hidden" name="txtUsuarioId" value="${usuario.usuarioId}">
 					<table>
 						<tr>
 							<td><fmt:message key="tb_user_name" /></td>
@@ -56,7 +50,7 @@
 							<td><fmt:message key="tb_user_user" /></td>
 							<td><input id="txtusuario" name="txtusuario" type="text" size="20" maxlength="20" required="required" value="${usuario.usuario}"></td>
 							<td><fmt:message key="tb_user_password" /></td>
-							<td><input id="txtclave" name="txtclave" type="password" size="20" maxlength="20" required="required"></td>
+							<td><input id="txtclave" name="txtclave" type="password" size="20" maxlength="20"></td>
 						</tr>
 						
 						<tr>
@@ -84,7 +78,7 @@
 			
 			<div class="pie">
 				<hr>
-				<button type="submit" class="medium" formmethod="post" formaction="${pageContext.request.contextPath}/UsuarioServlet?accion=insertar"><fmt:message key="g_save" /></button>
+				<button type="submit" class="medium" formmethod="post" formaction="${pageContext.request.contextPath}/UsuarioServlet?accion=actualizar"><fmt:message key="g_save" /></button>
 				<button type="submit" class="medium" formmethod="post" formaction="${pageContext.request.contextPath}/UsuarioServlet?accion=refrescar" formnovalidate ><fmt:message key="g_cancel" /></button>
 			</div>	
 		</div>

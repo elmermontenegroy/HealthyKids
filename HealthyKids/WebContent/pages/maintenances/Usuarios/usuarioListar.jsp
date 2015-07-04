@@ -27,8 +27,24 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#tblMUsuarioListar').DataTable({
-				"lengthMenu": [[10], [10]]
+				"scrollY":        "400px",
+		        "scrollCollapse": true,
+		        "paging":         false
 			});
+			
+			$( "#btnUsuarioEliminar" ).click(function() {
+				var usuariosEliminar="";
+				$("#tblMUsuarioListar input[type='checkbox']").each(function(index, value) { 
+					if(value.checked){
+						console.log(value.dataset.usuarioid);
+						usuariosEliminar+=value.dataset.usuarioid+",";
+					}
+				});
+				console.log(usuariosEliminar);
+				console.log(usuariosEliminar.substring(0, usuariosEliminar.length-1))
+				$("#txtUsuariosEliminar").val(usuariosEliminar.substring(0, usuariosEliminar.length-1));
+			});
+			
 		});
 	</script>
 	
@@ -61,6 +77,7 @@
 				            <th><fmt:message key="tb_user_user" /></th>
 				            <th><fmt:message key="tb_user_phone" /></th>
 				            <th><fmt:message key="tb_user_email" /></th>
+				            <th><fmt:message key="g_actions" /></th>
 				        </tr>
 				    </thead>
 				    <tbody>
@@ -73,15 +90,18 @@
 								<td>${usuario.usuario}</td>
 								<td>${usuario.telefono}</td>
 								<td>${usuario.email}</td>
+								<td><input type="checkbox" data-usuarioid="${usuario.usuarioId}" /></td>
 					        </tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				<input id="txtUsuariosEliminar" name="txtUsuariosEliminar" type="hidden">
 			</div>
 			
 			<div class="pie">
 				<hr>
 				<button type="submit" class="medium" formmethod="post" formaction="${pageContext.request.contextPath}/UsuarioServlet?carga=cargarInsertar"><fmt:message key="g_add" /></button>
+				<button id="btnUsuarioEliminar" type="submit" class="medium" formmethod="post" formaction="${pageContext.request.contextPath}/UsuarioServlet?accion=eliminar"><fmt:message key="g_delete" /></button>
 			</div>	
 		</div>
 	</form>

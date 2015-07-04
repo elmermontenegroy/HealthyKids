@@ -24,13 +24,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/kickstart.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/javascript.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#tblMUsuarioListar').DataTable({
-				"lengthMenu": [[5, 10], [5, 10]]
-			});
-		});
-	</script>
 	
 </head>
 <body>

@@ -1,3 +1,4 @@
+<%@ page import="com.healthykids.beans.UsuarioDTO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -24,6 +25,9 @@
 	</head>
 	<body class="defaultHeader">
 		<h3>Healthy Kids</h3>
+		<fmt:message key="tb_user_user" />:
+		<%= ((UsuarioDTO)request.getSession().getAttribute("usuario")).getNombre() %>
+		<a href="${pageContext.request.contextPath}/LoginServlet?accion=logout" target="_parent"><fmt:message key="l_logout" /></a>
 	</body>
 </html>
 

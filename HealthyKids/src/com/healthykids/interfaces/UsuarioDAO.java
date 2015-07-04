@@ -10,7 +10,7 @@ public interface UsuarioDAO {
 	public int insertar(UsuarioDTO usuario);
 	public int actualizar(UsuarioDTO usuario);
 	public List<UsuarioDTO> listar(UsuarioDTO usuario);
-	public int eliminar(Integer usuarioId);
+	public int eliminar(String usuariosId);
 	
 	//Avanzados
 	public UsuarioDTO loguear(UsuarioDTO usuario);

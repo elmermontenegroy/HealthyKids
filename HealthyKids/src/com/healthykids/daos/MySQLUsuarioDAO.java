@@ -64,7 +64,7 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
 		
 		try {
 			con = MySQLConexion.getConexion();
-			sp ="{call sp_Usuario_Actualizar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+			sp ="{call sp_usuario_actualizar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 			cst = con.prepareCall(sp);
 			
 			cst.setInt(1, usuario.getUsuarioId()!=null?usuario.getUsuarioId():0);
@@ -142,7 +142,7 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
 		return result;
 	}
 
-	public int eliminar(Integer usuarioId) {
+	public int eliminar(String usuariosId) {
 		Connection con = null;
 		CallableStatement cst = null;
 		String sp;
@@ -150,21 +150,21 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
 		
 		try {
 			con = MySQLConexion.getConexion();
-			sp ="{call sp_Usuario_Eliminar(?)}";
+			sp ="{call sp_usuario_eliminar(?)}";
 			cst = con.prepareCall(sp);
 			
-			cst.setInt(1, usuarioId);
+			cst.setString(1, usuariosId);
 			
 			result = cst.executeUpdate();
 			
 		} catch (Exception e) {
-			System.out.println("MySQLUsuarioDAO - actualizar -> Error en la Conexión: "+e.getMessage());
+			System.out.println("MySQLUsuarioDAO - eliminar -> Error en la Conexión: "+e.getMessage());
 		} finally{
 			try {
 				if(con != null) con.close();
 				if(cst != null) cst.close();
 			} catch (SQLException e) {
-				System.out.println("MySQLUsuarioDAO - actualizar -> No se pudo Cerrar la Conexión: "+e.getMessage());
+				System.out.println("MySQLUsuarioDAO - eliminar -> No se pudo Cerrar la Conexión: "+e.getMessage());
 			} 
 		}
 		
