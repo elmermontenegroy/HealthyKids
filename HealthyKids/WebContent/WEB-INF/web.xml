@@ -12,8 +12,4 @@
     <param-name>jmesaPreferencesLocation</param-name>
     <param-value>WEB-INF/jmesa.properties</param-value>
   </context-param>
-	<listener>
-		<description>MiListener</description>
-		<listener-class>com.healthykids.listeners.SessionListener</listener-class>
-	</listener>
 </web-app>
