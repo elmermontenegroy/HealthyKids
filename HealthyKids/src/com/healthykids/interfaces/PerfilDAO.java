@@ -9,6 +9,6 @@ public interface PerfilDAO {
 	public int insertar(PerfilDTO perfil);
 	public int actualizar(PerfilDTO perfil);
 	public List<PerfilDTO> listar(PerfilDTO perfil);
-	public int eliminar(Integer perfilId);
+	public int eliminar(String perfilesId);
 
 }

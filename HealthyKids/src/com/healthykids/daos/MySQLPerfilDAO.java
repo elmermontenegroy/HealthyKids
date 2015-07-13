@@ -17,14 +17,65 @@ public class MySQLPerfilDAO implements PerfilDAO{
 
 	@Override
 	public int insertar(PerfilDTO perfil) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = null;
+		CallableStatement cst = null;
+		String sp;
+		int result=0;
+		
+		try {
+			con = MySQLConexion.getConexion();
+			sp ="{call sp_perfil_insertar(?, ?)}";
+			cst = con.prepareCall(sp);
+			
+			cst.setString(1, perfil.getDescripcion()!=null?perfil.getDescripcion():"");
+			cst.setString(2, perfil.getEstado()!=null?perfil.getEstado():"");
+			
+			result = cst.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("MySQLPerfilDAO - insertar -> Error en la Conexión: "+e.getMessage());
+		} finally{
+			try {
+				if(con != null) con.close();
+				if(cst != null) cst.close();
+			} catch (SQLException e) {
+				System.out.println("MySQLPerfilDAO - insertar -> No se pudo Cerrar la Conexión: "+e.getMessage());
+			} 
+		}
+		
+		return result;
 	}
 
 	@Override
 	public int actualizar(PerfilDTO perfil) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = null;
+		CallableStatement cst = null;
+		String sp;
+		int result=0;
+		
+		try {
+			con = MySQLConexion.getConexion();
+			sp ="{call sp_perfil_actualizar(?, ?, ?)}";
+			cst = con.prepareCall(sp);
+			
+			cst.setInt(1, perfil.getPerfilId()!=null?perfil.getPerfilId():0);
+			cst.setString(2, perfil.getDescripcion()!=null?perfil.getDescripcion():"");
+			cst.setString(3, perfil.getEstado()!=null?perfil.getEstado():"");
+						
+			result = cst.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("MySQLPerfilDAO - actualizar -> Error en la Conexión: "+e.getMessage());
+		} finally{
+			try {
+				if(con != null) con.close();
+				if(cst != null) cst.close();
+			} catch (SQLException e) {
+				System.out.println("MySQLPerfilDAO - actualizar -> No se pudo Cerrar la Conexión: "+e.getMessage());
+			} 
+		}
+		
+		return result;
 	}
 
 	@Override
@@ -66,9 +117,33 @@ public class MySQLPerfilDAO implements PerfilDAO{
 	}
 
 	@Override
-	public int eliminar(Integer perfilId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int eliminar(String perfilesId) {
+		Connection con = null;
+		CallableStatement cst = null;
+		String sp;
+		int result=0;
+		
+		try {
+			con = MySQLConexion.getConexion();
+			sp ="{call sp_perfil_eliminar(?)}";
+			cst = con.prepareCall(sp);
+			
+			cst.setString(1, perfilesId);
+			
+			result = cst.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("MySQLPerfilDAO - eliminar -> Error en la Conexión: "+e.getMessage());
+		} finally{
+			try {
+				if(con != null) con.close();
+				if(cst != null) cst.close();
+			} catch (SQLException e) {
+				System.out.println("MySQLPerfilDAO - eliminar -> No se pudo Cerrar la Conexión: "+e.getMessage());
+			} 
+		}
+		
+		return result;
 	}
 
 }
