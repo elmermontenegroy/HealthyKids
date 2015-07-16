@@ -30,7 +30,7 @@
 	                <input type="checkbox" />
 	                <a href="#" data-toggle="dropdown"><fmt:message key="m_maintenances" /></a>
 	                <ul class="dropdown-menu">
-	                <li><a href="${pageContext.request.contextPath}/pages/maintenances/Perfiles/perfilListar.jsp" target="body"><fmt:message key="m_profiles" /></a></li>
+	                <li><a href="${pageContext.request.contextPath}/PerfilServlet?carga=cargarListar" target="body"><fmt:message key="m_profiles" /></a></li>
 	                <li><a href="${pageContext.request.contextPath}/UsuarioServlet?carga=cargarListar" target="body"><fmt:message key="m_users" /></a></li>
 	                </ul>
 	            </li>

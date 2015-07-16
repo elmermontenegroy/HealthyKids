@@ -1,7 +1,6 @@
 package com.healthykids.servlets;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.healthykids.beans.FuncionalidadDTO;
 import com.healthykids.beans.PerfilDTO;
 import com.healthykids.beans.UsuarioDTO;
 import com.healthykids.services.PerfilService;
@@ -63,11 +63,11 @@ public class PerfilServlet extends HttpServlet {
 	//Metodos de Carga
 	private void cargarInsertar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("cargarInsertar - inicio");
-		List <PerfilDTO> lista;
+		List <FuncionalidadDTO> lista;
 		PerfilService servicioPerfil = new PerfilService();
-		lista=servicioPerfil.listar(new PerfilDTO());
+		lista=servicioPerfil.listarFuncionalidades(new FuncionalidadDTO());
 		request.setAttribute("listPerfiles", lista);
-		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioInsertar.jsp").forward (request, response);
+		request.getRequestDispatcher("pages/maintenances/Perfiles/usuarioInsertar.jsp").forward (request, response);
 		System.out.println("cargarInsertar - fin");
 	}
 	private void cargarActualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -82,12 +82,12 @@ public class PerfilServlet extends HttpServlet {
 		request.setAttribute("listPerfiles", lista);
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("fechaNacimiento", FechaUtils.dateToStringFormato(usuario.getFechaNacimiento(), "yyyy-MM-dd"));
-		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioActualizar.jsp").forward (request, response);
+		request.getRequestDispatcher("pages/maintenances/Perfiles/usuarioActualizar.jsp").forward (request, response);
 		System.out.println("cargarActualizar - fin");
 	}
 	private void cargarListar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("cargarListar - inicio");
-		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioListar.jsp").forward (request, response);
+		request.getRequestDispatcher("pages/maintenances/Perfiles/perfilListar.jsp").forward (request, response);
 		System.out.println("cargarListar - fin");
 	}
 
@@ -143,25 +143,22 @@ public class PerfilServlet extends HttpServlet {
 	}
 	private void listar(HttpServletRequest request, HttpServletResponse response){
 		System.out.println("listar - inicio");
-		UsuarioService servicioUsuario = new UsuarioService();
-		List<UsuarioDTO> listUsuario; 
-		UsuarioDTO usuarioBuscado;
+		PerfilService servicioPerfil = new PerfilService();
+		List<PerfilDTO> listPerfil; 
+		PerfilDTO perfilBuscado;
 		try {
 			int cboBusqueda = Integer.parseInt(request.getParameter("cboBusqueda"));
 			String txtBusqueda = request.getParameter("txtBusqueda");
-			usuarioBuscado = new UsuarioDTO();
-			usuarioBuscado.setEstado("A");
+			perfilBuscado = new PerfilDTO();
+			perfilBuscado.setEstado("A");
 			
 			switch (cboBusqueda) {
-				case 0: usuarioBuscado.setNombre(txtBusqueda);break;
-				case 1: usuarioBuscado.setApellido(txtBusqueda);break;
-				case 2: usuarioBuscado.setUsuario(txtBusqueda);break;
+				case 0: perfilBuscado.setDescripcion(txtBusqueda);break;
 			}
 			
-			listUsuario = servicioUsuario.listar(usuarioBuscado);
-			request.setAttribute("listUsuario", listUsuario);
-			request.getSession().setAttribute("usuarioBuscado", usuarioBuscado);
-			request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioListar.jsp").forward (request, response);
+			listPerfil = servicioPerfil.listar(perfilBuscado);
+			request.setAttribute("listPerfil", listPerfil);
+			request.getRequestDispatcher("pages/maintenances/Perfiles/perfilListar.jsp").forward (request, response);
 			
 		} catch (Exception e) {
 			System.out.println("Error en UsuarioServlet - listar - "+e.getMessage());
@@ -187,6 +184,6 @@ public class PerfilServlet extends HttpServlet {
 			listUsuario = servicioUsuario.listar(usuarioBuscado);
 			request.setAttribute("listUsuario", listUsuario);
 		}
-		request.getRequestDispatcher("pages/maintenances/Usuarios/usuarioListar.jsp").forward (request, response);
+		request.getRequestDispatcher("pages/maintenances/Perfiles/usuarioListar.jsp").forward (request, response);
 	}
 }

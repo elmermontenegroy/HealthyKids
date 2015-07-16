@@ -71,7 +71,7 @@
 				        </tr>
 				    </thead>
 				    <tbody>
-						<c:forEach var="usuario" items="${listProfile}">
+						<c:forEach var="perfil" items="${listPerfil}">
 							<tr>
 					            <td><a href="${pageContext.request.contextPath}/PerfilServlet?carga=cargarActualizar&profileId=${perfil.perfilId}" target="body">${perfil.descripcion}</a></td>
 								<td>${perfil.estado}</td>

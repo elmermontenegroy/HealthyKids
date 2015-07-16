@@ -1,5 +1,6 @@
 package com.healthykids.daos;
 
+import com.healthykids.interfaces.FuncionalidadDAO;
 import com.healthykids.interfaces.PerfilDAO;
 import com.healthykids.interfaces.UsuarioDAO;
 
@@ -24,5 +25,6 @@ public abstract class DAOFactory {
 	//Declaramos cada una de los Metodos DAO
 	public abstract UsuarioDAO getUsuarioDAO();
 	public abstract PerfilDAO getPerfilDAO();
+	public abstract FuncionalidadDAO getFuncionalidadDAO();
 
 }

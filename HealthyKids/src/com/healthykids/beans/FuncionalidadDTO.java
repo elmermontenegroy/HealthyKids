@@ -13,9 +13,7 @@ public class FuncionalidadDTO {
 		
 	}
 	
-	public FuncionalidadDTO(Integer funcionalidadId, String descripcion,
-			String estado, String tipo) {
-		super();
+	public FuncionalidadDTO(Integer funcionalidadId, String descripcion, String estado, String tipo) {
 		this.funcionalidadId = funcionalidadId;
 		this.descripcion = descripcion;
 		this.estado = estado;
